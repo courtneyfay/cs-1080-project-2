@@ -2,6 +2,11 @@ const characters = [
     {
         name: 'Fawkes',
         imageSrc: 'images/fawkes.jpg',
+        attributes: {
+            animal: true,
+            harryPotter: true,
+            tall: false,
+        },
     },
     {
         name: 'Gollum',
@@ -97,9 +102,36 @@ const characters = [
     },
 ]
 
+const PLAYER = 'player'
+const COMPUTER = 'computer'
+
 const gameData = {
+    whoseTurn: PLAYER,
+    turnsTaken: 0,
     playerCard: '',
     computerCard: '',
+}
+
+const takePlayerTurn = () => {
+    console.log('hitting player turn')
+    // 1. player asks yes/no question from preselected list to computer
+    // 2. computer responds yes or no
+    // 3. player knocks down cards manually based on information
+    // 4. change to computer's turn
+    // TODO: how does the computer know when it's their turn?
+}
+
+const takeTurn = () => {
+    console.log('takeTurn', gameData.whoseTurn)
+    if (gameData.whoseTurn === PLAYER) {
+        takePlayerTurn()
+    } else if (gameData.whoseTurn === COMPUTER) {
+        // TODO: what happens when it's the computer's turn?
+        console.log('hitting computer turn')
+    } else {
+        // game is over?
+        console.log('hitting else')
+    }
 }
 
 const chooseRandomCard = (array) => {
@@ -131,17 +163,17 @@ const chooseCards = () => {
 }
 
 const generateCharacterCard = (name, imageSrc) => {
-    // 1. create character card div and add class
+    // create character card div and add class
     const cardElement = document.createElement('div')
     cardElement.classList.add('character-card')
 
-    // 2. add image to character card div
+    // add image to character card div
     const imageElement = document.createElement('img')
     imageElement.src = imageSrc
     imageElement.alt = 'Image of ' + name
     cardElement.appendChild(imageElement)
 
-    // 3. add name to character card div
+    // add name to character card div
     const nameElement = document.createElement('p')
     nameElement.innerHTML = name
     cardElement.appendChild(nameElement)
@@ -154,10 +186,10 @@ const showGameBoard = () => {
 
     // loop through all character cards
     for (let i = 0; i < characters.length; i++) {
-        // 1. generate character card div with name and image
+        // generate character card div with name and image
         const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc)
 
-        // 2. append character card div to card list div
+        // append character card div to card list div
         gameBoardDiv.appendChild(characterCard)
     }
 }
@@ -166,8 +198,15 @@ const startGame = () => {
     console.log('Game has begun - HUZZAH!')
     showGameBoard()
     chooseCards()
+    takeTurn()
+    // 4. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
 
-    // 3. TODO: Take a turn (player 1 asks yes/no question from preselected list, player 2 responds yes or no (corrected if you choose wrong), player 1 knocks down cards)
-    // 3b. TODO: Keep looping turns
-    // 3a. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
+    // 5. TODO: Keep looping turns
+    // let x = 0
+    // TODO: change to !gameOver value
+    // while (gameData.turnsTaken < 3) {
+    //     console.log('while loop')
+    //     takeTurn()
+    //     x += gameData.turnsTaken
+    // }
 }

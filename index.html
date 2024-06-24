@@ -10,7 +10,19 @@
     <body>
         <div class="board-wrapper">
             <div class="player-game-board"></div>
-            <div class="player-chosen-card"></div>
+            <div class="player-chosen-card">
+                <div>
+                    <label for="question">Choose a yes/no question to ask the computer:</label>
+    
+                    <select name="question" id="question">
+                        <option value="animal">Is your character an animal?</option>
+                        <option value="harryPotter">Is your character from Harry Potter?</option>
+                        <option value="tall">Is your character tall?</option>
+                    </select>
+
+                    <input type="submit" value=">>" />
+                </div>
+            </div>
         </div>
     </body>
 
