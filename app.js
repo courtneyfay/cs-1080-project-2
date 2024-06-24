@@ -222,7 +222,6 @@ const COMPUTER = 'computer'
 
 const gameData = {
     whoseTurn: PLAYER,
-    question: '',
     turnsTaken: 0,
     playerCard: '',
     computerCard: '',
@@ -230,22 +229,24 @@ const gameData = {
 
 const handleSubmit = (event) => {
     event.preventDefault()
+    console.log('gameData.computerCard', gameData.computerCard)
+    
+    // find value of question in the computer's chosen card
     const selectedOption = document.forms['selected-question'].question.value
-    console.log('selectedOption', selectedOption)
-    // console.log('computerCard', computerCard)
     const value = gameData.computerCard.attributes[selectedOption]
-    console.log('value', value)
+
+    // show yes or no answer to player
+    const answerDiv = document.querySelector('.yes-no-answer')
+    const answerElement = document.createElement('p')
+    const answer = value === true ? 'Yes' : 'No'
+    answerElement.innerHTML = answer + ". Click on cards to hide them."
+    answerDiv.appendChild(answerElement)
 }
 
 const takePlayerTurn = () => {
-    console.log('hitting player turn')
     // listen for input from selected question submission
     const submitButton = document.getElementById('submit-button')
     submitButton.addEventListener('click', handleSubmit)
-
-    // 2. computer evaluates question and responds yes or no
-    // 3. player knocks down cards manually based on information
-    // 4. change to computer's turn
 }
 
 const takeTurn = () => {
@@ -288,23 +289,30 @@ const chooseCards = () => {
     gameData.computerCard = randomComputerCard
 }
 
+const handleClick = (event) => {
+    console.log('hittin ghandle click,', event)
+}
+
 const generateCharacterCard = (name, imageSrc) => {
-    // create character card div and add class
-    const cardElement = document.createElement('div')
-    cardElement.classList.add('character-card')
+    // create character card button and add class and click handler
+    const cardButton = document.createElement('button')
+    cardButton.onclick = handleClick
+    cardButton.classList.add('character-card')
+
+    // add click handler to button so they can be flipped
 
     // add image to character card div
     const imageElement = document.createElement('img')
     imageElement.src = imageSrc
     imageElement.alt = 'Image of ' + name
-    cardElement.appendChild(imageElement)
+    cardButton.appendChild(imageElement)
 
     // add name to character card div
     const nameElement = document.createElement('p')
     nameElement.innerHTML = name
-    cardElement.appendChild(nameElement)
+    cardButton.appendChild(nameElement)
 
-    return cardElement
+    return cardButton
 }
 
 const showGameBoard = () => {

@@ -39,3 +39,7 @@
     max-width: 70%;
     height: auto;
 }
+
+.character-card:hover {
+    background-color: yellow;
+}
