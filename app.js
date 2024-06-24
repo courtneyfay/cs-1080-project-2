@@ -97,29 +97,43 @@ const characters = [
     },
 ]
 
-const showPlayerGameBoard = () => {
+const generateCharacterCard = (name, imageSrc) => {
+    // 1. create character card div and add class
+    const cardElement = document.createElement('div')
+    cardElement.classList.add('character-card')
+
+    // 2. add image to character card div
+    const imageElement = document.createElement('img')
+    imageElement.src = imageSrc
+    imageElement.alt = 'Image of ' + name
+    cardElement.appendChild(imageElement)
+
+    // 3. add name to character card div
+    const nameElement = document.createElement('p')
+    nameElement.innerHTML = name
+    cardElement.appendChild(nameElement)
+
+    return cardElement
+}
+
+const showGameBoard = () => {
     const gameBoard = document.querySelector('.player-game-board')
     // loop through all character cards
     for (let i = 0; i < characters.length; i++) {
-        // 1. create character card div and add class
-        const characterCard = document.createElement('div')
-        characterCard.classList.add('character-card')
-        // 2. add image to character card div
-        const image = document.createElement('img')
-        image.src = characters[i].imageSrc
-        image.alt = 'Image of ' + characters[i].name
-        characterCard.appendChild(image)
-        // 3. add name to character card div
-        const name = document.createElement('p')
-        name.innerHTML = characters[i].name
-        characterCard.appendChild(name)
-        // 4. append character card div to player game board div
+        // 1. generate character card div with name and image
+        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc)
+
+        // 2. append character card div to player game board div
         gameBoard.appendChild(characterCard)
     }
 }
 
 const startGame = () => {
     console.log('Game has begun - HUZZAH!')
-    // 1. Show all character cards
-    showPlayerGameBoard()
+    showGameBoard()
+
+    // 2. TODO: Show player's chosen card
+    // 3. TODO: Take a turn (player 1 asks yes/no question from preselected list, player 2 responds yes or no (corrected if you choose wrong), player 1 knocks down cards)
+    // 3b. TODO: Keep looping turns
+    // 3a. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
 }
