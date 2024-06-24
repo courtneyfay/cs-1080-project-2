@@ -97,10 +97,34 @@ const characters = [
     },
 ]
 
-const generateCharacterCard = (name, imageSrc) => {
+const gameData = {
+    playerCard: '',
+    computerCard: '',
+}
+
+const chooseCards = () => {
+    // 1. make a copy of the characters array, and choose a random card for player from array copy
+    const charactersCopy = [...characters]
+    const index = Math.floor(Math.random() * charactersCopy.length)
+    const randomPlayerCard = charactersCopy[index]
+    // 1. save player card to global value, and remove element from the array copy
+    gameData.playerCard = randomPlayerCard
+    charactersCopy.splice(index, 1)
+    // 2. create player card and append to the dom
+    const chosenPlayerCard = generateCharacterCard(randomPlayerCard.name, randomPlayerCard.imageSrc, 'character-card')
+    const chosenCardDiv = document.querySelector('.player-chosen-card')
+    chosenCardDiv.appendChild(chosenPlayerCard)
+    // 3. choose random computer card and remove from copy array
+    // 4. save computer card to global value
+    console.log('characters', characters.length)
+    console.log('charactersCopy', charactersCopy.length)
+    console.log('gameData', gameData)
+}
+
+const generateCharacterCard = (name, imageSrc, className) => {
     // 1. create character card div and add class
     const cardElement = document.createElement('div')
-    cardElement.classList.add('character-card')
+    cardElement.classList.add(className)
 
     // 2. add image to character card div
     const imageElement = document.createElement('img')
@@ -121,7 +145,7 @@ const showGameBoard = () => {
     // loop through all character cards
     for (let i = 0; i < characters.length; i++) {
         // 1. generate character card div with name and image
-        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc)
+        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc, 'character-card-list')
 
         // 2. append character card div to player game board div
         gameBoard.appendChild(characterCard)
@@ -132,7 +156,8 @@ const startGame = () => {
     console.log('Game has begun - HUZZAH!')
     showGameBoard()
 
-    // 2. TODO: Show player's chosen card
+    // Show player's chosen card
+    chooseCards()
     // 3. TODO: Take a turn (player 1 asks yes/no question from preselected list, player 2 responds yes or no (corrected if you choose wrong), player 1 knocks down cards)
     // 3b. TODO: Keep looping turns
     // 3a. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn

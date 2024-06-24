@@ -23,7 +23,7 @@
 }
 
 /* CARD STYLES */
-.character-card {
+.character-card-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +32,21 @@
     height: 25vh;
 }
 
-.character-card img {
+.character-card-list img {
     max-width: 80%;
+    height: auto;
+}
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 20vh;
+}
+
+.character-card img {
+    max-width: 70%;
     height: auto;
 }
