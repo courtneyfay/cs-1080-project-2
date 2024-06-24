@@ -111,7 +111,7 @@ const chooseCards = () => {
     gameData.playerCard = randomPlayerCard
     charactersCopy.splice(index, 1)
     // 2. create player card and append to the dom
-    const chosenPlayerCard = generateCharacterCard(randomPlayerCard.name, randomPlayerCard.imageSrc, 'character-card')
+    const chosenPlayerCard = generateCharacterCard(randomPlayerCard.name, randomPlayerCard.imageSrc)
     const chosenCardDiv = document.querySelector('.player-chosen-card')
     chosenCardDiv.appendChild(chosenPlayerCard)
     // 3. choose random computer card and remove from copy array
@@ -121,10 +121,10 @@ const chooseCards = () => {
     console.log('gameData', gameData)
 }
 
-const generateCharacterCard = (name, imageSrc, className) => {
+const generateCharacterCard = (name, imageSrc) => {
     // 1. create character card div and add class
     const cardElement = document.createElement('div')
-    cardElement.classList.add(className)
+    cardElement.classList.add('character-card')
 
     // 2. add image to character card div
     const imageElement = document.createElement('img')
@@ -141,14 +141,15 @@ const generateCharacterCard = (name, imageSrc, className) => {
 }
 
 const showGameBoard = () => {
-    const gameBoard = document.querySelector('.player-game-board')
+    const gameBoardDiv = document.querySelector('.player-game-board')
+
     // loop through all character cards
     for (let i = 0; i < characters.length; i++) {
         // 1. generate character card div with name and image
-        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc, 'character-card-list')
+        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc)
 
-        // 2. append character card div to player game board div
-        gameBoard.appendChild(characterCard)
+        // 2. append character card div to card list div
+        gameBoardDiv.appendChild(characterCard)
     }
 }
 

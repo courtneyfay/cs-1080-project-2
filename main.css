@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
 }
 
 /* GAME BOARD STYLES */
@@ -10,40 +9,30 @@
     width: 80%;
     height: 80vh;
     background-color: hotpink;
-    /* styling for cards within board */
+    /* styles for character card list */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 .player-chosen-card {
-    width: 10%;
-    height: 15vh;
-    background-color: green;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: yellow;
 }
 
 /* CARD STYLES */
-.character-card-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    width: 12.4%;
-    height: 25vh;
-}
-
-.character-card-list img {
-    max-width: 80%;
-    height: auto;
-}
-
 .character-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    width: 100%;
+    width: 12.4%;
     height: 20vh;
+    background-color: green;
 }
 
 .character-card img {
