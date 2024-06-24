@@ -1,6 +1,7 @@
 const characters = [
     {
         name: 'Fawkes',
+        imageSrc: 'images/fawkes.jpg',
     },
     {
         name: 'Gollum',
@@ -84,9 +85,11 @@ const showPlayerGameBoard = () => {
         const name = document.createElement('p')
         name.innerHTML = characters[i].name
         characterCard.appendChild(name)
-        // 3. add color to character card div
-        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16)
-        characterCard.style.background = randomColor
+        // 3. add image to character card div
+        const image = document.createElement('img')
+        image.src = characters[i].imageSrc
+        image.alt = 'Image of ' + characters[i].name
+        characterCard.appendChild(image)
         // 4. append character card div to player game board div
         gameBoard.appendChild(characterCard)
     }
