@@ -37,7 +37,7 @@ const characters = [
     },
     {
         name: 'Ganondorf',
-        imageSrc: 'images/ganondorf.jpg',
+        imageSrc: 'images/ganondorf.png',
     },
     {
         name: 'Ron',
@@ -49,7 +49,7 @@ const characters = [
     },
     {
         name: 'Tyrion',
-        imageSrc: 'images/tyrion.jpg',
+        imageSrc: 'images/tyrion.png',
     },
     {
         name: 'Tin Man',
@@ -93,7 +93,7 @@ const characters = [
     },
     {
         name: 'Navi',
-        imageSrc: 'images/navi.jpg',
+        imageSrc: 'images/navi.png',
     },
 ]
 
