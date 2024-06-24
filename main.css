@@ -5,6 +5,7 @@
     justify-content: space-evenly;
 }
 
+/* GAME BOARD STYLES */
 .player-game-board {
     width: 80%;
     height: 80vh;
@@ -15,4 +16,10 @@
     width: 10%;
     height: 15vh;
     background-color: green;
+}
+
+/* CARD STYLES */
+.character-card {
+    width: 10%;
+    height: 15vh;
 }
