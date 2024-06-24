@@ -102,23 +102,32 @@ const gameData = {
     computerCard: '',
 }
 
+const chooseRandomCard = (array) => {
+    // choose random card
+    const index = Math.floor(Math.random() * array.length)
+    const randomCard = array[index]
+
+    // remove from array
+    array.splice(index, 1)
+
+    return randomCard
+}
+
 const chooseCards = () => {
-    // 1. make a copy of the characters array, and choose a random card for player from array copy
     const charactersCopy = [...characters]
-    const index = Math.floor(Math.random() * charactersCopy.length)
-    const randomPlayerCard = charactersCopy[index]
-    // 1. save player card to global value, and remove element from the array copy
+
+    // 1. choose random card for player and save to gameData variable
+    const randomPlayerCard = chooseRandomCard(charactersCopy)
     gameData.playerCard = randomPlayerCard
-    charactersCopy.splice(index, 1)
-    // 2. create player card and append to the dom
+
+    // 2. create player card and append
     const chosenPlayerCard = generateCharacterCard(randomPlayerCard.name, randomPlayerCard.imageSrc)
     const chosenCardDiv = document.querySelector('.player-chosen-card')
     chosenCardDiv.appendChild(chosenPlayerCard)
-    // 3. choose random computer card and remove from copy array
-    // 4. save computer card to global value
-    console.log('characters', characters.length)
-    console.log('charactersCopy', charactersCopy.length)
-    console.log('gameData', gameData)
+
+    // 3. choose random computer card and save to gameData variable
+    const randomComputerCard = chooseRandomCard(charactersCopy)
+    gameData.computerCard = randomComputerCard
 }
 
 const generateCharacterCard = (name, imageSrc) => {
@@ -156,9 +165,8 @@ const showGameBoard = () => {
 const startGame = () => {
     console.log('Game has begun - HUZZAH!')
     showGameBoard()
-
-    // Show player's chosen card
     chooseCards()
+
     // 3. TODO: Take a turn (player 1 asks yes/no question from preselected list, player 2 responds yes or no (corrected if you choose wrong), player 1 knocks down cards)
     // 3b. TODO: Keep looping turns
     // 3a. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
