@@ -11,94 +11,209 @@ const characters = [
     {
         name: 'Gollum',
         imageSrc: 'images/gollum.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
         },
+    },
     {
         name: 'Lady',
         imageSrc: 'images/lady.jpg',
+        attributes: {
+            animal: true,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Cowardly Lion',
         imageSrc: 'images/cowardly-lion.jpg',
+        attributes: {
+            animal: true,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Epona',
         imageSrc: 'images/epona.png',
+        attributes: {
+            animal: true,
+            harryPotter: false,
+            tall: true,
+        },
     },
     {
         name: 'Voldemort',
         imageSrc: 'images/voldemort.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: true,
+            tall: false,
+        },
     },
     {
         name: 'Sarumon',
         imageSrc: 'images/sarumon.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Joffrey',
         imageSrc: 'images/joffrey.png',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Wicked Witch of the West',
         imageSrc: 'images/wicked-witch-of-the-west.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Ganondorf',
         imageSrc: 'images/ganondorf.png',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: true,
+        },
     },
     {
         name: 'Ron',
         imageSrc: 'images/ron.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: true,
+            tall: false,
+        },
     },
     {
         name: 'Frodo',
         imageSrc: 'images/frodo.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Tyrion',
         imageSrc: 'images/tyrion.png',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Tin Man',
         imageSrc: 'images/tin-man.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Link',
         imageSrc: 'images/link.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Professor McGonagall',
         imageSrc: 'images/professor-mcgonagall.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: true,
+            tall: false,
+        },
     },
     {
         name: 'Arwen',
         imageSrc: 'images/arwen.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Arya',
         imageSrc: 'images/arya.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Dorothy',
         imageSrc: 'images/dorothy.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Princess Zelda',
         imageSrc: 'images/princess-zelda.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Dobby',
         imageSrc: 'images/dobby.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: true,
+            tall: false,
+        },
     },
     {
         name: 'Treebeard',
         imageSrc: 'images/treebeard.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: true,
+        },
     },
     {
         name: 'Scarecrow',
         imageSrc: 'images/scarecrow.jpg',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
     {
         name: 'Navi',
         imageSrc: 'images/navi.png',
+        attributes: {
+            animal: false,
+            harryPotter: false,
+            tall: false,
+        },
     },
 ]
 
@@ -107,22 +222,33 @@ const COMPUTER = 'computer'
 
 const gameData = {
     whoseTurn: PLAYER,
+    question: '',
     turnsTaken: 0,
     playerCard: '',
     computerCard: '',
 }
 
+const handleSubmit = (event) => {
+    event.preventDefault()
+    const selectedOption = document.forms['selected-question'].question.value
+    console.log('selectedOption', selectedOption)
+    // console.log('computerCard', computerCard)
+    const value = gameData.computerCard.attributes[selectedOption]
+    console.log('value', value)
+}
+
 const takePlayerTurn = () => {
     console.log('hitting player turn')
-    // 1. player asks yes/no question from preselected list to computer
-    // 2. computer responds yes or no
+    // listen for input from selected question submission
+    const submitButton = document.getElementById('submit-button')
+    submitButton.addEventListener('click', handleSubmit)
+
+    // 2. computer evaluates question and responds yes or no
     // 3. player knocks down cards manually based on information
     // 4. change to computer's turn
-    // TODO: how does the computer know when it's their turn?
 }
 
 const takeTurn = () => {
-    console.log('takeTurn', gameData.whoseTurn)
     if (gameData.whoseTurn === PLAYER) {
         takePlayerTurn()
     } else if (gameData.whoseTurn === COMPUTER) {
