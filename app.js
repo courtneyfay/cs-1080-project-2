@@ -1,18 +1,75 @@
 const characters = [
     {
-        name: 'character 1',
-        color: 'red',
-        attributes: [],
+        name: 'Fawkes',
     },
     {
-        name: 'character 2',
-        color: 'yellow',
-        attributes: [],
+        name: 'Gollum',
     },
     {
-        name: 'character 3',
-        color: 'blue',
-        attributes: [],
+        name: 'Lady',
+    },
+    {
+        name: 'Cowardly Lion',
+    },
+    {
+        name: 'Epona',
+    },
+    {
+        name: 'Voldemort',
+    },
+    {
+        name: 'Sarumon',
+    },
+    {
+        name: 'Joffrey',
+    },
+    {
+        name: 'Wicked Witch of the West',
+    },
+    {
+        name: 'Ganondorf',
+    },
+    {
+        name: 'Ron',
+    },
+    {
+        name: 'Frodo',
+    },
+    {
+        name: 'Tyrion',
+    },
+    {
+        name: 'Tin Man',
+    },
+    {
+        name: 'Link',
+    },
+    {
+        name: 'Professor McGonagall',
+    },
+    {
+        name: 'Arwen',
+    },
+    {
+        name: 'Arya',
+    },
+    {
+        name: 'Dorothy',
+    },
+    {
+        name: 'Princess Zelda',
+    },
+    {
+        name: 'Dobby',
+    },
+    {
+        name: 'Treebeard',
+    },
+    {
+        name: 'Scarecrow',
+    },
+    {
+        name: 'Navi',
     },
 ]
 
@@ -28,7 +85,8 @@ const showPlayerGameBoard = () => {
         name.innerHTML = characters[i].name
         characterCard.appendChild(name)
         // 3. add color to character card div
-        characterCard.style.background = characters[i].color
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16)
+        characterCard.style.background = randomColor
         // 4. append character card div to player game board div
         gameBoard.appendChild(characterCard)
     }

@@ -10,8 +10,10 @@
     width: 80%;
     height: 80vh;
     background-color: hotpink;
+    /* styling for cards within board */
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .player-chosen-card {
@@ -22,6 +24,6 @@
 
 /* CARD STYLES */
 .character-card {
-    width: 12%;
+    width: 12.4%;
     height: 25vh;
 }
