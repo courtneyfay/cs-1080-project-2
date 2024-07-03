@@ -47,6 +47,12 @@
     pointer-events: none;
 }
 
+.player-chosen-card .character-card {
+    background-color: purple;
+    /* prevents player's card from being clickable */
+    pointer-events: none;
+}
+
 .character-card:hover {
     background-color: yellow;
 }
