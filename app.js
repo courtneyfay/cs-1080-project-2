@@ -397,14 +397,24 @@ const createPlayerGameBoard = () => {
     }
 }
 
+const createComputerGameBoard = () => {
+    const computerGameBoardDiv = document.querySelector('.computer-game-board')
+    const randomizedCharacters = randomizeCharacterList()
+
+    for (let i = 0; i < randomizedCharacters.length; i++) {
+        // generate computer ?? card div
+        const characterCard = document.createElement('div')
+        characterCard.classList.add('computer-character-card')
+        characterCard.textContent = '??'
+
+        // append character card div to card list div
+        computerGameBoardDiv.appendChild(characterCard)
+    }
+}
+
 const showGameBoards = () => {
     createPlayerGameBoard()
-    const computerGameBoardDiv = document.querySelector('.computer-game-board')
-
-    // loop through all character cards
-    // TODO: randomizeCharacterList()
-    
-
+    createComputerGameBoard()
 }
 
 const startGame = () => {
