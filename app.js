@@ -222,6 +222,7 @@ const COMPUTER = 'computer'
 
 const gameData = {
     whoseTurn: PLAYER,
+    turnCount: 0,
     playerCard: '',
     computerCard: '',
 }
@@ -229,6 +230,15 @@ const gameData = {
 const takeComputerTurn = () => {
     console.log('hitting computer turn', gameData)
     // TODO: what happens when it's the computer's turn?
+
+    // computer asks player a yes/no question
+    // play clicks yes or no button
+    // updates computer's tiny board on the screen with removed cards
+    // change whoteTurn to player
+
+    // increment turnCount
+    // gameData.turnCount = gameData.turnCount++
+    // console.log('new turn count', gameData.turnCount)
 }
 
 const handleComputerTurn = (event) => {
@@ -274,13 +284,15 @@ const takePlayerTurn = () => {
 }
 
 const takeTurn = () => {
+    if (gameData.turnCount >= 3) {
+        // game ends after 3 complete turns, regardless of who is winning
+        console.log('hitting game over!')
+    }
+
     if (gameData.whoseTurn === PLAYER) {
         takePlayerTurn()
     } else if (gameData.whoseTurn === COMPUTER) {
         takeComputerTurn()
-    } else {
-        // TODO: game is over?
-        console.log('hitting else')
     }
 }
 
@@ -329,17 +341,6 @@ const handleClick = (event) => {
             name.classList.add('hide')
         }
     }
-
-    // TODO: it might be possible to remove this code if it doesn't end up getting used
-    for (var index = 0; index < characters.length; index++) {
-        const currentCharacter = characters[index]
-        const isMatch = currentCharacter.name.includes(chosenCard)
-
-        if (isMatch) {
-            // update the array behind the scenes to change visibility property
-            currentCharacter.visibility = false
-        }
-    }
 }
 
 const generateCharacterCard = (name, imageSrc) => {
@@ -365,25 +366,50 @@ const generateCharacterCard = (name, imageSrc) => {
     return cardButton
 }
 
-const showGameBoard = () => {
-    const gameBoardDiv = document.querySelector('.player-game-board')
+const randomizeCharacterList = () => {
+    const randomized = [...characters]
+    let currentIndex = randomized.length
+    
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+    
+        // Pick a remaining element...
+        const randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [randomized[currentIndex], randomized[randomIndex]] = [randomized[randomIndex], randomized[currentIndex]]
+    }
 
-    // loop through all character cards
-    for (let i = 0; i < characters.length; i++) {
+    return randomized
+}
+
+const createPlayerGameBoard = () => {
+    const playerGameBoardDiv = document.querySelector('.player-game-board')
+    const randomizedCharacters = randomizeCharacterList()
+
+    for (let i = 0; i < randomizedCharacters.length; i++) {
         // generate character card div with name and image
-        const characterCard = generateCharacterCard(characters[i].name, characters[i].imageSrc)
+        const characterCard = generateCharacterCard(randomizedCharacters[i].name, randomizedCharacters[i].imageSrc)
 
         // append character card div to card list div
-        gameBoardDiv.appendChild(characterCard)
+        playerGameBoardDiv.appendChild(characterCard)
     }
+}
+
+const showGameBoards = () => {
+    createPlayerGameBoard()
+    const computerGameBoardDiv = document.querySelector('.computer-game-board')
+
+    // loop through all character cards
+    // TODO: randomizeCharacterList()
+    
+
 }
 
 const startGame = () => {
     console.log('Game has begun - HUZZAH!')
-    showGameBoard()
+    showGameBoards()
     chooseCards()
     takeTurn()
-    // 4. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
-
-    // 5. TODO: how to win the game?
 }
