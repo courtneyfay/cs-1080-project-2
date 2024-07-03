@@ -7,7 +7,7 @@
 /* GAME BOARD STYLES */
 .player-game-board {
     width: 80%;
-    height: 80vh;
+    height: 70vh;
     background-color: hotpink;
     /* styles for character card list */
     display: flex;
@@ -36,7 +36,7 @@
 }
 
 .character-card img {
-    max-width: 70%;
+    max-width: 60%;
     height: auto;
     /* prevents img from being clickable */
     pointer-events: none;

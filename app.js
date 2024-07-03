@@ -227,26 +227,46 @@ const gameData = {
     computerCard: '',
 }
 
-const handleSubmit = (event) => {
+const handleComputerTurn = (event) => {
+    event.preventDefault()
+
+    gameData.whoseTurn = COMPUTER
+    console.log('gameData', gameData)
+}
+
+const handleQuestionSubmit = (event) => {
     event.preventDefault()
     console.log('gameData.computerCard', gameData.computerCard)
     
     // find value of question in the computer's chosen card
     const selectedOption = document.forms['selected-question'].question.value
+    console.log('selectedOption', selectedOption)
     const value = gameData.computerCard.attributes[selectedOption]
 
     // show yes or no answer to player
     const answerDiv = document.querySelector('.yes-no-answer')
     const answerElement = document.createElement('p')
     const answer = value === true ? 'Yes' : 'No'
-    answerElement.innerHTML = answer + ". Click on cards to hide them."
+    answerElement.textContent = answer
+    const instructionsElement = document.createElement('p')
+    instructionsElement.textContent = "Click on cards to hide them. When you're finished with your turn, click the 'OKAY' button to allow the computer to play its turn."
+    answerElement.append(instructionsElement)
     answerDiv.appendChild(answerElement)
+
+    // disable submit button
+    document.getElementById('submit-button').disabled = true
+
+    // show computer turn button
+    const computerTurnButton = document.createElement('button')
+    computerTurnButton.textContent = "OKAY"
+    computerTurnButton.addEventListener('click', handleComputerTurn)
+    answerDiv.appendChild(computerTurnButton)
 }
 
 const takePlayerTurn = () => {
     // listen for input from selected question submission
     const submitButton = document.getElementById('submit-button')
-    submitButton.addEventListener('click', handleSubmit)
+    submitButton.addEventListener('click', handleQuestionSubmit)
 }
 
 const takeTurn = () => {
@@ -307,6 +327,7 @@ const handleClick = (event) => {
         }
     }
 
+    // TODO: it might be possible to remove this code if it doesn't end up getting used
     for (var index = 0; index < characters.length; index++) {
         const currentCharacter = characters[index]
         const isMatch = currentCharacter.name.includes(chosenCard)
