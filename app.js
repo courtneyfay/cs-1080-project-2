@@ -222,7 +222,6 @@ const COMPUTER = 'computer'
 
 const gameData = {
     whoseTurn: PLAYER,
-    turnsTaken: 0,
     playerCard: '',
     computerCard: '',
 }
@@ -232,6 +231,8 @@ const handleComputerTurn = (event) => {
 
     gameData.whoseTurn = COMPUTER
     console.log('gameData', gameData)
+
+    takeTurn()
 }
 
 const handleQuestionSubmit = (event) => {
@@ -240,7 +241,6 @@ const handleQuestionSubmit = (event) => {
     
     // find value of question in the computer's chosen card
     const selectedOption = document.forms['selected-question'].question.value
-    console.log('selectedOption', selectedOption)
     const value = gameData.computerCard.attributes[selectedOption]
 
     // show yes or no answer to player
@@ -382,12 +382,5 @@ const startGame = () => {
     takeTurn()
     // 4. TODO: Take a turn to see if you can win - player 1 asks if it is X character - RIGHT: you win, WRONG: player 2's turn
 
-    // 5. TODO: Keep looping turns
-    // let x = 0
-    // TODO: change to !gameOver value
-    // while (gameData.turnsTaken < 3) {
-    //     console.log('while loop')
-    //     takeTurn()
-    //     x += gameData.turnsTaken
-    // }
+    // 5. TODO: how to win the game?
 }
