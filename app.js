@@ -306,6 +306,16 @@ const handleClick = (event) => {
             name.classList.add('hide')
         }
     }
+
+    for (var index = 0; index < characters.length; index++) {
+        const currentCharacter = characters[index]
+        const isMatch = currentCharacter.name.includes(chosenCard)
+
+        if (isMatch) {
+            // update the array behind the scenes to change visibility property
+            currentCharacter.visibility = false
+        }
+    }
 }
 
 const generateCharacterCard = (name, imageSrc) => {
