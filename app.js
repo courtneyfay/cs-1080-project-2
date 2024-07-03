@@ -226,11 +226,15 @@ const gameData = {
     computerCard: '',
 }
 
+const takeComputerTurn = () => {
+    console.log('hitting computer turn', gameData)
+    // TODO: what happens when it's the computer's turn?
+}
+
 const handleComputerTurn = (event) => {
     event.preventDefault()
 
     gameData.whoseTurn = COMPUTER
-    console.log('gameData', gameData)
 
     takeTurn()
 }
@@ -273,10 +277,9 @@ const takeTurn = () => {
     if (gameData.whoseTurn === PLAYER) {
         takePlayerTurn()
     } else if (gameData.whoseTurn === COMPUTER) {
-        // TODO: what happens when it's the computer's turn?
-        console.log('hitting computer turn')
+        takeComputerTurn()
     } else {
-        // game is over?
+        // TODO: game is over?
         console.log('hitting else')
     }
 }
@@ -311,7 +314,7 @@ const chooseCards = () => {
 
 const handleClick = (event) => {
     const chosenCard = event.currentTarget.textContent
-    const allCards = document.querySelectorAll('.character-card')
+    const allCards = document.querySelector('.player-game-board').querySelectorAll('.character-card')
 
     for (var index = 0; index < allCards.length; index++) {
         const currentCard = allCards[index]
