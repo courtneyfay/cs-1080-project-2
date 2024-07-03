@@ -217,6 +217,21 @@ const characters = [
     },
 ]
 
+const questions = [
+    {
+        question: 'Is your character an animal?',
+        value: 'animal',
+    },
+    {
+        question: 'Is your character from Harry Potter?',
+        value: 'harryPotter',
+    },
+    {
+        question: 'Is your character tall?',
+        value: 'tall',
+    },
+]
+
 const PLAYER = 'player'
 const COMPUTER = 'computer'
 
@@ -227,18 +242,69 @@ const gameData = {
     computerCard: '',
 }
 
-const takeComputerTurn = () => {
-    console.log('hitting computer turn', gameData)
-    // TODO: what happens when it's the computer's turn?
+const handleYes = (questionKey) => {
+    console.log('hitting yes!', questionKey)
+    const value = true
+    // TODO: run through computer's card array (not UI) and change ?? to X if value IS a match
+    const allCards = document.querySelector('.computer-game-board').querySelectorAll('.computer-character-card')
 
-    // computer asks player a yes/no question
-    // play clicks yes or no button
-    // updates computer's tiny board on the screen with removed cards
-    // change whoteTurn to player
+    for (var index = 0; index < allCards.length; index++) {
+        const currentCard = allCards[index]
+        console.log('currentCard', currentCard.textContent)
+        const isMatch = currentCard.textContent.includes(chosenCard)
+        
+        if (isMatch) {
+            // "flip" card over by hiding p and img tags
+            const img = currentCard.children[0]
+            const name = currentCard.children[1]
+
+            img.classList.add('hide')
+            name.classList.add('hide')
+        }
+    }
+
+    // change whoseTurn to player
 
     // increment turnCount
     // gameData.turnCount = gameData.turnCount++
     // console.log('new turn count', gameData.turnCount)
+}
+
+const handleNo = (questionKey) => {
+    console.log('hitting no!', questionKey)
+    const value = false
+    // value = false NOT an animal
+    // const selectedOption = document.forms['selected-question'].question.value
+    // const value = gameData.computerCard.attributes[selectedOption]
+    // const answer = value === true ? 'Yes' : 'No'
+    // TODO: run through computer's cards and change ?? to X if value is NOT a match
+
+    // change whoseTurn to player
+
+    // increment turnCount
+    // gameData.turnCount = gameData.turnCount++
+    // console.log('new turn count', gameData.turnCount)
+}
+
+const takeComputerTurn = () => {
+    // hide player question
+    const playerQuestion = document.querySelector('.player-question')
+    playerQuestion.classList.add('hide')
+
+    // show computer's yes/no question for the player
+    const computerQuestionDiv = document.querySelector('.computer-question')
+    const questionElem = document.createElement('p')
+    // TODO: randomize the question picking
+    questionElem.textContent = questions[0].question
+    const yesButton = document.createElement('button')
+    yesButton.textContent = 'Yes!'
+    yesButton.addEventListener('click', handleYes.bind(null, questions[0].value))
+    const noButton = document.createElement('button')
+    noButton.textContent = 'No'
+    noButton.addEventListener('click', handleNo.bind(null, questions[0].value))
+    computerQuestionDiv.append(questionElem)
+    computerQuestionDiv.append(yesButton)
+    computerQuestionDiv.append(noButton)
 }
 
 const handleComputerTurn = (event) => {
@@ -418,7 +484,6 @@ const showGameBoards = () => {
 }
 
 const startGame = () => {
-    console.log('Game has begun - HUZZAH!')
     showGameBoards()
     chooseCards()
     takeTurn()
