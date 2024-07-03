@@ -38,8 +38,19 @@
 .character-card img {
     max-width: 70%;
     height: auto;
+    /* prevents img from being clickable */
+    pointer-events: none;
+}
+
+.character-card-name {
+    /* prevents p from being clickable */
+    pointer-events: none;
 }
 
 .character-card:hover {
     background-color: yellow;
+}
+
+.hide {
+    display: none;
 }

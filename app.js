@@ -290,16 +290,31 @@ const chooseCards = () => {
 }
 
 const handleClick = (event) => {
-    console.log('hittin ghandle click,', event)
+    const chosenCard = event.currentTarget.textContent
+    const allCards = document.querySelectorAll('.character-card')
+
+    for (var index = 0; index < allCards.length; index++) {
+        const currentCard = allCards[index]
+        const isMatch = currentCard.textContent.includes(chosenCard)
+        
+        if (isMatch) {
+            // "flip" card over by hiding p and img tags
+            const img = currentCard.children[0]
+            const name = currentCard.children[1]
+
+            img.classList.add('hide')
+            name.classList.add('hide')
+        }
+    }
 }
 
 const generateCharacterCard = (name, imageSrc) => {
     // create character card button and add class and click handler
     const cardButton = document.createElement('button')
-    cardButton.onclick = handleClick
     cardButton.classList.add('character-card')
 
-    // add click handler to button so they can be flipped
+    // add click handler to button so wrong cards can be flipped over
+    cardButton.onclick = handleClick
 
     // add image to character card div
     const imageElement = document.createElement('img')
@@ -309,7 +324,8 @@ const generateCharacterCard = (name, imageSrc) => {
 
     // add name to character card div
     const nameElement = document.createElement('p')
-    nameElement.innerHTML = name
+    nameElement.classList.add('character-card-name')
+    nameElement.textContent = name
     cardButton.appendChild(nameElement)
 
     return cardButton
